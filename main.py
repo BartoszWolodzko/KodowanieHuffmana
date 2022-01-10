@@ -73,17 +73,19 @@ def kompresjaHuffmana(plik_do_kompresji, plik_wynikowy):
 
     code = compres_tekst(slownik_do_szyfrowania, tekst)
 
-    wynik = str(slownik_do_szyfrowania)
+    wynik = str(slownik_do_szyfrowania) + "end"
     wynik = wynik.replace("'", "")
+    wynik = wynik.replace("{", "")
+    wynik = wynik.replace("}", "")
     wynik = wynik.replace(": ", ":")
     wynik = wynik.replace(",", "")
     slownik_binarnie = ''.join(format(ord(i), '08b') for i in wynik)
 
-    print(_to_Bytes(slownik_binarnie + "\n" + code))
-    save_to_bin(_to_Bytes(slownik_binarnie + "\n" + code), plik_wynikowy)
+    print(_to_Bytes(slownik_binarnie + code))
+    save_to_bin(_to_Bytes(slownik_binarnie + code), plik_wynikowy)
 
 
-plik_do_kompresji = "test1.txt"
-plik_wynikowy = "wynik.bin"
+plik_do_kompresji = "test_z_zajec.txt"
+plik_wynikowy = "test_z_zajec.bin"
 kompresjaHuffmana(plik_do_kompresji, plik_wynikowy)
 print("done")
